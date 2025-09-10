@@ -18,12 +18,12 @@ public class FuncionarioService {
         this.funcionarioRepository = funcionarioRepository;
     }
 
-    public List<Funcionario> listarFuncionarios() {
+    public List<Funcionario> getFuncionarios() {
         return funcionarioRepository.findAll();
     }
 
-    public Funcionario listarFuncionarios(Long id) {
-        return funcionarioRepository.findById(id).get();
+    public Funcionario getFuncionario(Long id) {
+        return funcionarioRepository.getReferenceById(id);
     }
 
     public Funcionario criarFuncionario(Funcionario funcionario) {
@@ -33,11 +33,19 @@ public class FuncionarioService {
     public Funcionario atualizarFuncionario(Long id, Funcionario funcionario) {
         Funcionario funcionarioAtualizado = this.funcionarioRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Funcionário não encontrado, verifique o ID: " + id));
         funcionarioAtualizado.setFuncionarioId(funcionario.getFuncionarioId());
+        funcionarioAtualizado.setCpf(funcionario.getCpf());
+        funcionarioAtualizado.setNome(funcionario.getNome());
+        funcionarioAtualizado.setEmail(funcionario.getEmail());
+        funcionarioAtualizado.setTelefone(funcionario.getTelefone());
+        funcionarioAtualizado.setEndereco(funcionario.getEndereco());
+        funcionarioAtualizado.setCargo(funcionario.getCargo());
+        funcionarioAtualizado.setDataCadastro(funcionario.getDataCadastro());
+        funcionarioAtualizado.setSalario(funcionario.getSalario());
         return funcionarioRepository.save(funcionarioAtualizado);
     }
 
     public void deletarFuncionario(Long id) {
-        if(!funcionarioRepository.existsById(id)) {
+        if (!funcionarioRepository.existsById(id)) {
             throw new NoSuchElementException("Funcionário não encontrado, verifique o id:" + id);
         }
         funcionarioRepository.deleteById(id);

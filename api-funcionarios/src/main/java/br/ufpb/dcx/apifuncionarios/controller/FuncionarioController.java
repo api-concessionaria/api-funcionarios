@@ -23,12 +23,12 @@ public class FuncionarioController {
 
     @GetMapping(path = "/funcionarios")
     public List<Funcionario> getFuncionarios() {
-        return this.funcionarioService.listarFuncionarios();
+        return this.funcionarioService.getFuncionarios();
     }
 
     @GetMapping(path = "/funcionarios/{funcionarioId}")
     public Funcionario getFuncionario(@PathVariable Long funcionarioId) {
-        return this.funcionarioService.listarFuncionarios(funcionarioId);
+        return this.funcionarioService.getFuncionario(funcionarioId);
     }
 
     @PostMapping(path = "/funcionarios")

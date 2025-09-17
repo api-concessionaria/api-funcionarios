@@ -4,5 +4,6 @@
 /home/user/Developer/sd/api-funcionarios/src/main/java/br/ufpb/dcx/apifuncionarios/mappers/FuncionarioMapper.java
 /home/user/Developer/sd/api-funcionarios/src/main/java/br/ufpb/dcx/apifuncionarios/models/Funcionario.java
 /home/user/Developer/sd/api-funcionarios/src/main/java/br/ufpb/dcx/apifuncionarios/repositories/FuncionarioRepository.java
+/home/user/Developer/sd/api-funcionarios/src/main/java/br/ufpb/dcx/apifuncionarios/security/SecurityConfig.java
 /home/user/Developer/sd/api-funcionarios/src/main/java/br/ufpb/dcx/apifuncionarios/services/FuncionarioService.java
 /home/user/Developer/sd/api-funcionarios/src/main/java/br/ufpb/dcx/apifuncionarios/validation/FuncionarioValidation.java

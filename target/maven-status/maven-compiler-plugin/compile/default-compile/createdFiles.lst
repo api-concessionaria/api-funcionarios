@@ -1,0 +1,8 @@
+br/ufpb/dcx/apifuncionarios/repositories/FuncionarioRepository.class
+br/ufpb/dcx/apifuncionarios/ApiFuncionariosApplication.class
+br/ufpb/dcx/apifuncionarios/validation/FuncionarioValidation.class
+br/ufpb/dcx/apifuncionarios/mappers/FuncionarioMapper.class
+br/ufpb/dcx/apifuncionarios/controller/FuncionarioController.class
+br/ufpb/dcx/apifuncionarios/services/FuncionarioService.class
+br/ufpb/dcx/apifuncionarios/models/Funcionario.class
+br/ufpb/dcx/apifuncionarios/dto/FuncionarioDTO.class

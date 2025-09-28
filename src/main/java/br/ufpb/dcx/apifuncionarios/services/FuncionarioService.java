@@ -36,11 +36,6 @@ public class FuncionarioService {
         funcionarioAtualizado.setCpf(funcionario.getCpf());
         funcionarioAtualizado.setNome(funcionario.getNome());
         funcionarioAtualizado.setEmail(funcionario.getEmail());
-        funcionarioAtualizado.setTelefone(funcionario.getTelefone());
-        funcionarioAtualizado.setEndereco(funcionario.getEndereco());
-        funcionarioAtualizado.setCargo(funcionario.getCargo());
-        funcionarioAtualizado.setDataCadastro(funcionario.getDataCadastro());
-        funcionarioAtualizado.setSalario(funcionario.getSalario());
         return funcionarioRepository.save(funcionarioAtualizado);
     }
 

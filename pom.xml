@@ -11,10 +11,10 @@
     </parent>
 
     <groupId>br.ufpb.dcx</groupId>
-    <artifactId>api-funcionarios</artifactId>
+    <artifactId>funcionario-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>api-funcionarios</name>
-    <description>api-funcionarios</description>
+    <description>funcionario-service</description>
     <url/>
     <licenses>
         <license/>
@@ -50,8 +50,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
 

@@ -5,12 +5,14 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "tbFuncionarios")
 @Data
+@NoArgsConstructor
 public class Funcionario {
 
     @Id
@@ -25,26 +27,8 @@ public class Funcionario {
     @Column(name = "cpf")
     private String cpf;
 
-    @NotBlank
-    @Column(name = "endereco")
-    private String endereco;
-
-    @NotBlank
-    @Column(name = "telefone")
-    private String telefone;
-
     @Email
     @Column(name = "email")
     private String email;
 
-    @NotBlank
-    @Column(name = "cargo")
-    private String cargo;
-
-    @NotNull
-    private Date dataCadastro;
-
-    @NotNull
-    @Column(name = "salario")
-    private double salario;
 }

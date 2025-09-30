@@ -24,13 +24,10 @@ public class FuncionarioController {
         this.funcionarioMapper = funcionarioMapper;
     }
 
-    // --- ESTE FOI O MÉTODO ALTERADO ---
     @GetMapping(path = "/funcionarios")
     public ResponseEntity<Map<String, Object>> getFuncionarios() {
-        // Busca a lista de funcionários como antes
         List<Funcionario> funcionarios = this.funcionarioService.getFuncionarios();
 
-        // Obtém o ID único do container (hostname)
         String instanceId;
         try {
             instanceId = java.net.InetAddress.getLocalHost().getHostName();
@@ -39,15 +36,12 @@ public class FuncionarioController {
             e.printStackTrace();
         }
 
-        // Cria o novo objeto de resposta
         Map<String, Object> response = new HashMap<>();
         response.put("instance_id", instanceId);
         response.put("funcionarios", funcionarios);
 
         return ResponseEntity.ok(response);
     }
-    // --- FIM DA ALTERAÇÃO ---
-
 
 
     @GetMapping(path = "/funcionarios/{funcionarioId}")

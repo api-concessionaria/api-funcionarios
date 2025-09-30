@@ -23,25 +23,32 @@ public class FuncionarioService {
     }
 
     public Funcionario getFuncionario(Long id) {
-        return funcionarioRepository.getReferenceById(id);
+        return funcionarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Funcionário não encontrado!"));
     }
 
     public Funcionario criarFuncionario(Funcionario funcionario) {
+        for (Funcionario f : funcionarioRepository.findAll()) {
+            if (f.getCpf().equals(funcionario.getCpf())) {
+                throw new NoSuchElementException("Já existe um funcionário cadastrado com esse cpf!");
+            }
+        }
         return funcionarioRepository.save(funcionario);
     }
 
     public Funcionario atualizarFuncionario(Long id, Funcionario funcionario) {
-        Funcionario funcionarioAtualizado = this.funcionarioRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Funcionário não encontrado, verifique o ID: " + id));
-        funcionarioAtualizado.setFuncionarioId(funcionario.getFuncionarioId());
+        Funcionario funcionarioAtualizado = funcionarioRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Funcionário não encontrado, verifique o ID: " + id));
+
         funcionarioAtualizado.setCpf(funcionario.getCpf());
         funcionarioAtualizado.setNome(funcionario.getNome());
         funcionarioAtualizado.setEmail(funcionario.getEmail());
         return funcionarioRepository.save(funcionarioAtualizado);
     }
 
+
     public void deletarFuncionario(Long id) {
         if (!funcionarioRepository.existsById(id)) {
-            throw new NoSuchElementException("Funcionário não encontrado, verifique o id:" + id);
+            throw new NoSuchElementException("Funcionário não encontrado!");
         }
         funcionarioRepository.deleteById(id);
     }

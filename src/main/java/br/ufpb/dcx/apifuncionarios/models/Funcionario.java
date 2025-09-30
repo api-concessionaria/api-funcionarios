@@ -31,4 +31,7 @@ public class Funcionario {
     @Column(name = "email")
     private String email;
 
+    @NotBlank
+    @Column(name = "cargo")
+    private String cargo;
 }

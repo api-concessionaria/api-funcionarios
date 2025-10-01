@@ -1,16 +1,14 @@
 package br.ufpb.dcx.apifuncionarios.controller;
 
 import br.ufpb.dcx.apifuncionarios.dto.FuncionarioDTO;
-import br.ufpb.dcx.apifuncionarios.mappers.FuncionarioMapper;
-import br.ufpb.dcx.apifuncionarios.models.Funcionario;
-import br.ufpb.dcx.apifuncionarios.services.FuncionarioService;
+import br.ufpb.dcx.apifuncionarios.mapper.FuncionarioMapper;
+import br.ufpb.dcx.apifuncionarios.model.Funcionario;
+import br.ufpb.dcx.apifuncionarios.service.FuncionarioService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity; // <-- ADICIONADO
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap; // <-- ADICIONADO
 import java.util.List;
-import java.util.Map; // <-- ADICIONADO
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -25,24 +23,9 @@ public class FuncionarioController {
     }
 
     @GetMapping(path = "/funcionarios")
-    public ResponseEntity<Map<String, Object>> getFuncionarios() {
-        List<Funcionario> funcionarios = this.funcionarioService.getFuncionarios();
-
-        String instanceId;
-        try {
-            instanceId = java.net.InetAddress.getLocalHost().getHostName();
-        } catch (java.net.UnknownHostException e) {
-            instanceId = "id-desconhecido";
-            e.printStackTrace();
-        }
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("instance_id", instanceId);
-        response.put("funcionarios", funcionarios);
-
-        return ResponseEntity.ok(response);
+    public List<FuncionarioDTO> getFuncionarios() {
+       return this.funcionarioService.getFuncionarios().stream().map(funcionarioMapper::toDTO).collect(Collectors.toList());
     }
-
 
     @GetMapping(path = "/funcionarios/{funcionarioId}")
     public Funcionario getFuncionario(@PathVariable Long funcionarioId) {

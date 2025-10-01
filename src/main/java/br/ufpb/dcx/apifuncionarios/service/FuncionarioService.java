@@ -1,12 +1,13 @@
-package br.ufpb.dcx.apifuncionarios.services;
+package br.ufpb.dcx.apifuncionarios.service;
 
-import br.ufpb.dcx.apifuncionarios.models.Funcionario;
-import br.ufpb.dcx.apifuncionarios.repositories.FuncionarioRepository;
+import br.ufpb.dcx.apifuncionarios.excepition.FuncionarioNotFoundException;
+import br.ufpb.dcx.apifuncionarios.excepition.FuncionariosIsExistException;
+import br.ufpb.dcx.apifuncionarios.model.Funcionario;
+import br.ufpb.dcx.apifuncionarios.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 public class FuncionarioService {
@@ -23,33 +24,29 @@ public class FuncionarioService {
     }
 
     public Funcionario getFuncionario(Long id) {
-        return funcionarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Funcionário não encontrado!"));
+        return funcionarioRepository.findById(id).orElseThrow(() -> new FuncionarioNotFoundException("Funcionário não encontrado!"));
     }
 
     public Funcionario criarFuncionario(Funcionario funcionario) {
-        for (Funcionario f : funcionarioRepository.findAll()) {
-            if (f.getCpf().equals(funcionario.getCpf())) {
-                throw new NoSuchElementException("Já existe um funcionário cadastrado com esse cpf!");
-            }
+        if (funcionarioRepository.existsByCpf(funcionario.getCpf())) {
+            throw new FuncionariosIsExistException("Já existe um funcionário cadastrado com esse cpf!");
         }
         return funcionarioRepository.save(funcionario);
     }
 
     public Funcionario atualizarFuncionario(Long id, Funcionario funcionario) {
         Funcionario funcionarioAtualizado = funcionarioRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Funcionário não encontrado, verifique o ID: " + id));
-
+                .orElseThrow(() -> new FuncionarioNotFoundException("Funcionário não encontrado, verifique o ID: " + id));
+        funcionarioAtualizado.setTelefone(funcionario.getTelefone());
         funcionarioAtualizado.setCpf(funcionario.getCpf());
         funcionarioAtualizado.setNome(funcionario.getNome());
         funcionarioAtualizado.setEmail(funcionario.getEmail());
+        funcionarioAtualizado.setCargo(funcionario.getCargo());
         return funcionarioRepository.save(funcionarioAtualizado);
     }
 
-
     public void deletarFuncionario(Long id) {
-        if (!funcionarioRepository.existsById(id)) {
-            throw new NoSuchElementException("Funcionário não encontrado!");
-        }
-        funcionarioRepository.deleteById(id);
+        Funcionario funcionario = funcionarioRepository.findById(id).orElseThrow(() -> new FuncionarioNotFoundException("Funcionário não encontrado!"));
+        funcionarioRepository.delete(funcionario);
     }
 }

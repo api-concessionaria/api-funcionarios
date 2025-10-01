@@ -1,7 +1,7 @@
-package br.ufpb.dcx.apifuncionarios.mappers;
+package br.ufpb.dcx.apifuncionarios.mapper;
 
 import br.ufpb.dcx.apifuncionarios.dto.FuncionarioDTO;
-import br.ufpb.dcx.apifuncionarios.models.Funcionario;
+import br.ufpb.dcx.apifuncionarios.model.Funcionario;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 

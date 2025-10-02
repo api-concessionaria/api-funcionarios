@@ -1,6 +1,7 @@
 package br.ufpb.dcx.apifuncionarios.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "tbFuncionarios")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Funcionario {
 
     @Id
